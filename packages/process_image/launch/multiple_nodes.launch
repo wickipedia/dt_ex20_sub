@@ -1,0 +1,13 @@
+<launch>
+
+  <group ns="detector">  
+  
+    <param name="red" type="bool" value="False" />
+    <param name="yellow" type="bool" value="False" />
+    <node pkg="process_image" type="process_image.py" name="process_yellow" args="yellow"  output="screen"/>
+    <node pkg="process_image" type="process_image.py" name="process_red" args="red" output="screen"/>
+
+
+   </group>
+
+</launch>

@@ -4,4 +4,7 @@ set -e
 
 # YOUR CODE BELOW THIS LINE
 # ----------------------------------------------------------------------------
-echo "This is an empty launch script. Update it to launch your application."
+roscore &
+sleep 5
+roslaunch process_image multiple_nodes.launch
+#rosrun read_bag read.py

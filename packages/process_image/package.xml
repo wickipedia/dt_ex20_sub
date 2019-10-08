@@ -1,0 +1,12 @@
+<package>
+	<name>process_image</name>
+  <version>0.1.0</version>
+  <description>
+	  Process image from PiCamera
+  </description>
+  <maintainer email="ewicki@ethz.ch">Elias Wicki</maintainer>
+  <license>None</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>
+ 
