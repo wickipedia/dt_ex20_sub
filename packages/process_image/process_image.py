@@ -17,9 +17,15 @@ def detector_yellow(data):
     upper_boundery = np.array([50,56,200])
     mask = cv2.inRange(cv_image,lower_boundery, upper_boundery)
     output = cv2.bitwise_and(cv_image, cv_image, mask = mask)
+    _,contours, hier = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+#    img = cv2.drawContours(output, contours, -1, (0,255,0), 3)
     print("publish")
-    ros_img = CvBridge().cv2_to_compressed_imgmsg(output)
-    contours, hier = cv2.findContours(threshed_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for c in contours:
+        # get the bounding rect
+        x, y, w, h = cv2.boundingRect(c)
+        # draw a green rectangle to visualize the bounding rect
+        cv2.rectangle(cv_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+    ros_img = CvBridge().cv2_to_compressed_imgmsg(cv_image)
     pub.publish(ros_img)
 
 def detector_red(data):
