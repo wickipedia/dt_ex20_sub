@@ -11,15 +11,15 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import CompressedImage
 
 
-
 def detector_yellow(data):
     cv_image = CvBridge().compressed_imgmsg_to_cv2(data, desired_encoding="passthrough")
-    lower_boundery = np.array([190,146,25])
-    upper_boundery = np.array([250,174,62])
+    lower_boundery = np.array([17, 15, 100])
+    upper_boundery = np.array([50,56,200])
     mask = cv2.inRange(cv_image,lower_boundery, upper_boundery)
     output = cv2.bitwise_and(cv_image, cv_image, mask = mask)
     print("publish")
     ros_img = CvBridge().cv2_to_compressed_imgmsg(output)
+    contours, hier = cv2.findContours(threshed_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     pub.publish(ros_img)
 
 def detector_red(data):
